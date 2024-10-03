@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
@@ -29,9 +30,11 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ListDemo (){
 
+    val list = listOf<String>("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
     LazyColumn (content = {
-        items(100, itemContent = {
-            SimpleDesign(name = "Name $it", desc = "Description $it")
+        itemsIndexed(list, itemContent = {index,item->
+            SimpleDesign(name = item, desc = "Description $item")
+
         })
     })
 
