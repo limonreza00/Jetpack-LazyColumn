@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -33,23 +35,16 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ListDemo (){
 
-    var scrollState = rememberScrollState()
+    LazyColumn (content = {
+        items(100, itemContent = {
+            SimpleDesign(name = "Name $it", desc = "Description $it")
+        })
+    })
 
-    Column (
-        modifier = Modifier
-            .verticalScroll(scrollState)
-            .padding(top=50.dp)
-    )
-    {
-
-        for (i in 1..100){
-            SimpleDesign()
-        }
-    }
 }
 
 @Composable
-fun SimpleDesign(){
+fun SimpleDesign(name:String,desc:String){
 
     Card(
         modifier = Modifier
@@ -60,26 +55,26 @@ fun SimpleDesign(){
 
         Row (modifier = Modifier.padding(top=5.dp)){
 
-            Image(
-                imageVector = Icons.Default.Person,
-                contentDescription = "person",
-                modifier = Modifier
-                    .padding(10.dp)
-                    .size(100.dp,100.dp)
-                    .clip(CircleShape).
-                    background(Color.White),
-                contentScale = ContentScale.Crop
-                    )
+         Image(
+             imageVector = Icons.Default.Person,
+             contentDescription = "person",
+             modifier = Modifier
+                 .padding(10.dp)
+                 .size(100.dp,100.dp)
+                 .clip(CircleShape).
+                 background(Color.White),
+             contentScale = ContentScale.Crop
+         )
 
             Column(modifier = Modifier.padding(top=10.dp, start = 10.dp)) {
                 Text(
-                    text = "Tony Stark",
+                    text = name,
                     fontSize = 25.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 10.dp)
                 )
 
-                Text(text = "I am Tony Stark the founder of Stark Industries")
+                Text(text = desc)
             }
         }
     }
